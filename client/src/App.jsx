@@ -1,9 +1,12 @@
-// import { useState } from 'react'
+import { StrictMode } from "react";
+import Home from "./pages/Home";
 
 function App() {
-  // const [count, setCount] = useState(0)
-
-  return null;
+  return (
+    <StrictMode>
+      <Home></Home>;
+    </StrictMode>
+  );
 }
 
 export default App;
