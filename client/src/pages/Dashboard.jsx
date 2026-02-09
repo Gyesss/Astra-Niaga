@@ -174,7 +174,7 @@ function Dashboard() {
           </aside>
 
           {/* Main Content Area */}
-          <main className="min-h-[450px] flex-1 rounded-xl border bg-white p-6 shadow-sm">
+          <main className="min-h-100 flex-1 rounded-xl border bg-white p-6 shadow-sm">
             
             {/* Tab: Profil */}
             {activeTab === "profile" && (
