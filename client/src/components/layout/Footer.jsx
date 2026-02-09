@@ -1,15 +1,14 @@
+import Brand from "./Header/Brand";
+
 function Footer() {
   return (
     <footer className="bg-white px-4 pt-16 pb-8 md:px-8 lg:px-16 xl:px-32">
       <div className="mb-12 grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
         <div className="flex flex-col gap-4">
-          <h2 className="text-2xl font-black tracking-tighter text-blue-500">
-            ASTRA NIAGA
-          </h2>
+          <Brand></Brand>
           <p className="text-sm leading-relaxed text-gray-500">
-            Solusi terbaik untuk kebutuhan alat tulis kantor, perlengkapan
-            sekolah, dan hobi Anda. Kami hadir memberikan kemudahan belanja bagi
-            warga Astra.
+            Capai Bintang Melalui Niaga - Menaungi produk UMKM demi menggapai
+            #indonesiaEmas2045!
           </p>
           <div className="flex gap-4 text-gray-400">
             <i className="fa-brands fa-instagram cursor-pointer text-xl transition-colors hover:text-blue-500"></i>

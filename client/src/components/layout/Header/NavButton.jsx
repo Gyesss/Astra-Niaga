@@ -1,20 +1,18 @@
 import { useState, useRef, useEffect } from "react";
 import LoginForm from "../../feature/Auth/LoginForm";
 import RegisterForm from "../../feature/Auth/RegisterForm";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function NavButton() {
+  const navigate = useNavigate(); // Inisialisasi navigate
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
-
-  // 1. Tambahkan state untuk menentukan mode (login atau register)
   const [authMode, setAuthMode] = useState("login");
-
-  // 2. Inisialisasi User (Solusi error cascading renders yang tadi)
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem("user");
     return savedUser ? JSON.parse(savedUser) : null;
   });
-
   const menuRef = useRef(null);
   const authRef = useRef(null);
 
@@ -37,8 +35,10 @@ function NavButton() {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
+    window.dispatchEvent(new Event("storage")); // <--- Pemicu agar Dashboard sadar
     setUser(null);
     setIsAuthOpen(false);
+    navigate("/");
   };
 
   useEffect(() => {
@@ -72,12 +72,15 @@ function NavButton() {
           {isMenuOpen && (
             <div className="absolute top-full right-0 z-50 mt-2 min-w-40 overflow-hidden rounded border bg-white text-center shadow-lg">
               <ul className="flex flex-col text-base text-gray-700">
-                <li className="cursor-pointer px-4 py-2 transition-all hover:bg-blue-500 hover:text-white">
+                <Link className="cursor-pointer px-4 py-2 transition-all hover:bg-blue-500 hover:text-white">
                   About Us
-                </li>
-                <li className="cursor-pointer px-4 py-2 transition-all hover:bg-blue-500 hover:text-white">
+                </Link>
+                <Link className="cursor-pointer px-4 py-2 transition-all hover:bg-blue-500 hover:text-white">
                   Product
-                </li>
+                </Link>
+                <Link className="cursor-pointer px-4 py-2 transition-all hover:bg-blue-500 hover:text-white">
+                  Transactions
+                </Link>
               </ul>
             </div>
           )}
@@ -118,12 +121,18 @@ function NavButton() {
                     {user.role}
                   </div>
                   <ul className="flex flex-col text-base text-gray-700">
-                    <li
+                    <Link
+                      to="/dashboard"
+                      className="flex cursor-pointer items-center gap-2 border-b px-4 py-2 font-medium text-blue-600 transition-all hover:bg-blue-50"
+                    >
+                      <i className="fa-solid fa-gauge-high"></i> Dashboard
+                    </Link>
+                    <Link
                       onClick={handleLogout}
                       className="cursor-pointer px-4 py-2 transition-all hover:bg-red-500 hover:text-white"
                     >
                       Log Out
-                    </li>
+                    </Link>
                   </ul>
                 </div>
               ) : /* TAMPILAN JIKA BELUM LOGIN (LOGIN VS REGISTER) */

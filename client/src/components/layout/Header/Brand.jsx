@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Brand() {
   return (
     <div className="group relative flex items-center transition-all duration-1000 hover:rotate-4 text-shadow-xs text-shadow-blue-950/50">
@@ -9,7 +11,7 @@ function Brand() {
       <p className="w-min text-2xl leading-none font-bold whitespace-pre-wrap text-blue-500 md:text-3xl">
         Astra Niaga
       </p>
-      <a href="" className="absolute h-full w-full"></a>
+      <Link to="/" className="absolute h-full w-full"></Link>
     </div>
   );
 }
