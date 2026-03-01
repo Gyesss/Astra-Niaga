@@ -66,6 +66,52 @@ app.delete("/api/products/:id", (req, res) => {
   }
 });
 
+// API: Ambil semua pesanan (Antrean)
+app.get("/api/orders", (req, res) => {
+  const data = readData();
+  res.json(data.orders || []);
+});
+
+// API: Kirim Pesanan Baru (Checkout)
+app.post("/api/orders", (req, res) => {
+  const data = readData();
+  const newOrder = { id: Date.now(), ...req.body, status: "pending" };
+  if (!data.orders) data.orders = [];
+  data.orders.push(newOrder);
+  writeData(data);
+  res.status(201).json(newOrder);
+});
+
+// API: ACC Pesanan (Pindah dari Orders ke Transactions)
+app.post("/api/orders/acc/:id", (req, res) => {
+  const { id } = req.params;
+  const data = readData();
+  const orderIndex = data.orders.findIndex((o) => o.id === parseInt(id));
+
+  if (orderIndex === -1)
+    return res.status(404).json({ error: "Order tidak ditemukan" });
+
+  const acceptedOrder = {
+    ...data.orders[orderIndex],
+    status: "success",
+    completedAt: new Date(),
+  };
+
+  // Pindahkan data
+  if (!data.transactions) data.transactions = [];
+  data.transactions.push(acceptedOrder);
+  data.orders.splice(orderIndex, 1);
+
+  writeData(data);
+  res.json({ message: "Pesanan berhasil di-ACC" });
+});
+
+// API: Riwayat Transaksi
+app.get("/api/transactions", (req, res) => {
+  const data = readData();
+  res.json(data.transactions || []);
+});
+
 app.listen(PORT, () => {
   console.log(
     `🚀 ASTRA NIAGA SERVER (ICB CINTA NIAGA) jalan di http://localhost:${PORT}`,

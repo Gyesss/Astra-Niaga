@@ -23,13 +23,13 @@ export default function AddProductForm({ isOpen, onClose, onRefresh }) {
                 onRefresh();
                 onClose();
             }
-        } catch (err) {
+        } catch {
             alert("Gagal koneksi ke server Astra Niaga (Port 3001)!");
         }
     };
 
     return (
-        <div className="fixed inset-0 z-[10000] flex items-center justify-center p-6 bg-blue-900/20 backdrop-blur-md">
+        <div className="fixed inset-0 z-10000 flex items-center justify-center p-6 bg-blue-900/20 backdrop-blur-md">
             <div className="bg-white w-full max-w-md p-8 rounded-[3rem] shadow-2xl border border-blue-100 animate-in fade-in zoom-in duration-300">
                 <div className="flex justify-between items-center mb-6">
                     <h2 className="text-2xl font-black text-gray-800 italic uppercase">TAMBAH <span className="text-blue-500">PRODUK UMKM</span></h2>

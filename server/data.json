@@ -49,5 +49,94 @@
       "category": "Makanan",
       "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?q=80&w=500&auto=format&fit=crop"
     }
+  ],
+  "orders": [],
+  "transactions": [
+    {
+      "id": 1772385151342,
+      "nama": "Aasahsa",
+      "kelas": "Asasaj",
+      "products": [
+        {
+          "id": 3,
+          "name": "Jasa Desain Logo UMKM",
+          "price": "Rp 50.000",
+          "category": "Jasa Creative",
+          "image": "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=500&auto=format&fit=crop",
+          "cartId": 1772383320977
+        },
+        {
+          "id": 1,
+          "name": "Basreng Pedas Daun Jeruk",
+          "price": "Rp 10.000",
+          "category": "Makanan",
+          "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?q=80&w=500&auto=format&fit=crop",
+          "cartId": 1772383322200
+        },
+        {
+          "id": 1,
+          "name": "Basreng Pedas Daun Jeruk",
+          "price": "Rp 10.000",
+          "category": "Makanan",
+          "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?q=80&w=500&auto=format&fit=crop",
+          "cartId": 1772385138492
+        },
+        {
+          "id": 1,
+          "name": "Basreng Pedas Daun Jeruk",
+          "price": "Rp 10.000",
+          "category": "Makanan",
+          "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?q=80&w=500&auto=format&fit=crop",
+          "cartId": 1772385139426
+        }
+      ],
+      "total": 80000,
+      "status": "success",
+      "completedAt": "2026-03-01T17:12:45.379Z"
+    },
+    {
+      "id": 1772385614425,
+      "nama": "Akhtar",
+      "kelas": "XI RPL",
+      "products": [
+        {
+          "id": 1,
+          "name": "Basreng Pedas Daun Jeruk",
+          "price": "Rp 10.000",
+          "category": "Makanan",
+          "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?q=80&w=500&auto=format&fit=crop",
+          "cartId": 1772385564568
+        },
+        {
+          "id": 1,
+          "name": "Basreng Pedas Daun Jeruk",
+          "price": "Rp 10.000",
+          "category": "Makanan",
+          "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?q=80&w=500&auto=format&fit=crop",
+          "cartId": 1772385576953
+        }
+      ],
+      "total": 20000,
+      "status": "success",
+      "completedAt": "2026-03-01T17:21:07.461Z"
+    },
+    {
+      "id": 1772386542383,
+      "nama": "Akhtar",
+      "kelas": "MP",
+      "products": [
+        {
+          "id": 3,
+          "name": "Jasa Desain Logo UMKM",
+          "price": "Rp 50.000",
+          "category": "Jasa Creative",
+          "image": "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=500&auto=format&fit=crop",
+          "cartId": 1772386514376
+        }
+      ],
+      "total": 50000,
+      "status": "success",
+      "completedAt": "2026-03-01T17:36:02.275Z"
+    }
   ]
 }
