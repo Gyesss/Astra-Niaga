@@ -1,143 +1,95 @@
 import { useState, useRef, useEffect } from "react";
 
-function NavButton() {
+function NavButton({ children, active }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [isLogIn] = useState(false);
+  const [user, setUser] = useState(null);
 
   const menuRef = useRef(null);
   const authRef = useRef(null);
 
-  function toggleMenu() {
-    setIsMenuOpen((prev) => !prev);
-    setIsAuthOpen(false);
-  }
-
-  function toggleAuth() {
-    setIsAuthOpen((prev) => !prev);
-    setIsMenuOpen(false);
-  }
-
+  // Cek status login saat pertama kali load
   useEffect(() => {
-    function handleClickOutside(e) {
-      if (
-        menuRef.current &&
-        !menuRef.current.contains(e.target) &&
-        authRef.current &&
-        !authRef.current.contains(e.target)
-      ) {
-        setIsMenuOpen(false);
-        setIsAuthOpen(false);
-      }
-    }
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) setUser(JSON.parse(savedUser));
 
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+    const handleClickOutside = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) setIsMenuOpen(false);
+      if (authRef.current && !authRef.current.contains(e.target)) setIsAuthOpen(false);
     };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  if (isLogIn) {
+  // Fungsi Login Simpel (Praktis)
+  const handleLogin = (role) => {
+    const userData = { name: "User Astra", role: role }; // role: 'pembeli' atau 'penjual'
+    localStorage.setItem("user", JSON.stringify(userData));
+    setUser(userData);
+    setIsAuthOpen(false);
+    window.location.reload(); // Refresh untuk update UI global
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    setIsAuthOpen(false);
+    window.location.reload();
+  };
+
+  // STYLE 1: Tombol Navigasi Biasa
+  if (children) {
     return (
-      <nav>
-        <div className="flex gap-4 text-xl md:gap-8 md:text-2xl">
-          <div className="relative" ref={menuRef}>
-            <button
-              onClick={toggleMenu}
-              className="cursor-pointer rounded transition-all duration-200 hover:text-blue-500"
-            >
-              <i className="fa-solid fa-bars"></i>
-            </button>
-
-            {isMenuOpen && (
-              <div className="absolute top-full right-0 mt-2 min-w-40 rounded border bg-gray-200/80 text-center shadow-lg">
-                <ul className="flex flex-col text-base">
-                  <li className="cursor-pointer px-3 py-2 transition-all duration-200 hover:bg-blue-500/80 hover:text-white">
-                    About Us
-                  </li>
-                  <li className="cursor-pointer px-3 py-2 transition-all duration-200 hover:bg-blue-500/80 hover:text-white">
-                    Product
-                  </li>
-                  <li></li>
-                </ul>
-              </div>
-            )}
-          </div>
-
-          <div className="relative" ref={authRef}>
-            <button
-              onClick={toggleAuth}
-              className="cursor-pointer rounded transition-all duration-200 hover:text-blue-500"
-            >
-              <i className="fa-solid fa-right-to-bracket"></i>
-            </button>
-
-            {isAuthOpen && (
-              <div className="absolute top-full right-0 mt-2 min-w-40 rounded border bg-gray-200/80 text-center shadow-lg">
-                <ul className="flex flex-col text-base">
-                  <li className="cursor-pointer px-3 py-2 transition-all duration-200 hover:bg-blue-500/80 hover:text-white">
-                    Log In
-                  </li>
-                  <li className="cursor-pointer px-3 py-2 transition-all duration-200 hover:bg-blue-500/80 hover:text-white">
-                    Register
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
-        </div>
-      </nav>
-    );
-  } else {
-    return (
-      <nav>
-        <div className="flex gap-4 text-xl md:gap-8 md:text-2xl">
-          <div className="relative" ref={menuRef}>
-            <button
-              onClick={toggleMenu}
-              className="cursor-pointer rounded transition-all duration-200 hover:text-red-500"
-            >
-              <i className="fa-solid fa-bars"></i>
-            </button>
-
-            {isMenuOpen && (
-              <div className="absolute top-full right-0 mt-2 min-w-40 rounded border bg-gray-200/80 text-center shadow-lg">
-                <ul className="flex flex-col text-base">
-                  <li className="cursor-pointer px-3 py-2 transition-all duration-200 hover:bg-red-500/80 hover:text-white">
-                    About Us
-                  </li>
-                  <li className="cursor-pointer px-3 py-2 transition-all duration-200 hover:bg-red-500/80 hover:text-white">
-                    Product
-                  </li>
-                  <li></li>
-                </ul>
-              </div>
-            )}
-          </div>
-
-          <div className="relative" ref={authRef}>
-            <button
-              onClick={toggleAuth}
-              className="cursor-pointer rounded transition-all duration-200 hover:text-red-500"
-            >
-              <i className="fa-solid fa-right-from-bracket"></i>
-            </button>
-
-            {isAuthOpen && (
-              <div className="absolute top-full right-0 mt-2 min-w-40 rounded border bg-gray-200/80 text-center shadow-lg">
-                <ul className="flex flex-col text-base">
-                  <li className="cursor-pointer px-3 py-2 transition-all duration-200 hover:bg-red-500/80 hover:text-white">
-                    Log Out
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
-        </div>
-      </nav>
+      <button className={`px-6 py-2 transition-all duration-300 font-bold rounded-full ${active ? 'bg-blue-500 text-white shadow-lg shadow-blue-200' : 'text-gray-600 hover:text-blue-500 hover:bg-blue-50'
+        }`}>
+        {children}
+      </button>
     );
   }
+
+  // STYLE 2: Icon Menu & Auth
+  return (
+    <nav className="flex gap-3 items-center">
+      {/* Menu Hamburger */}
+      <div className="relative" ref={menuRef}>
+        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-3 rounded-2xl bg-gray-100 text-gray-600 hover:bg-blue-500 hover:text-white transition-all">
+          <i className="fa-solid fa-bars"></i>
+        </button>
+        {isMenuOpen && (
+          <div className="absolute top-full right-0 mt-3 min-w-48 rounded-4xl border border-blue-50 bg-white shadow-2xl shadow-blue-900/10 overflow-hidden z-50 p-2">
+            <div className="px-4 py-3 hover:bg-blue-50 text-gray-700 rounded-2xl cursor-pointer font-medium transition-colors">Tentang Kami</div>
+            <div className="px-4 py-3 hover:bg-blue-50 text-gray-700 rounded-2xl cursor-pointer font-medium transition-colors">Produk Astra</div>
+            {user?.role === 'penjual' && (
+              <div className="px-4 py-3 bg-blue-500 text-white rounded-2xl cursor-pointer font-bold mt-1">Tambah Produk +</div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Auth Section */}
+      <div className="relative" ref={authRef}>
+        <button onClick={() => setIsAuthOpen(!isAuthOpen)} className={`p-3 rounded-2xl transition-all ${user ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-blue-500 hover:text-white'}`}>
+          <i className={`fa-solid ${user ? 'fa-user' : 'fa-right-to-bracket'}`}></i>
+        </button>
+        {isAuthOpen && (
+          <div className="absolute top-full right-0 mt-3 min-w-56 rounded-4xl border border-blue-50 bg-white shadow-2xl shadow-blue-900/10 overflow-hidden z-50 p-3">
+            {user ? (
+              <>
+                <div className="px-4 py-2 mb-2 text-xs font-black text-blue-500 uppercase tracking-widest">Akun: {user.role}</div>
+                <button onClick={handleLogout} className="w-full text-left px-4 py-3 bg-red-50 text-red-500 rounded-2xl font-bold hover:bg-red-500 hover:text-white transition-all">Log Out</button>
+              </>
+            ) : (
+              <div className="flex flex-col gap-2">
+                <div className="px-4 py-1 text-[10px] font-black text-gray-400 uppercase tracking-widest">Masuk Sebagai</div>
+                <button onClick={() => handleLogin('pembeli')} className="w-full text-left px-4 py-3 bg-blue-50 text-blue-600 rounded-2xl font-bold hover:bg-blue-500 hover:text-white transition-all">🛒 Pembeli</button>
+                <button onClick={() => handleLogin('penjual')} className="w-full text-left px-4 py-3 bg-blue-50 text-blue-600 rounded-2xl font-bold hover:bg-blue-500 hover:text-white transition-all">🏪 Penjual</button>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </nav>
+  );
 }
 
 export default NavButton;

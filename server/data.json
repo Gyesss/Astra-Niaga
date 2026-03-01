@@ -1,0 +1,53 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Basreng Pedas Daun Jeruk",
+      "price": "Rp 10.000",
+      "category": "Makanan",
+      "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?q=80&w=500&auto=format&fit=crop"
+    },
+    {
+      "id": 3,
+      "name": "Jasa Desain Logo UMKM",
+      "price": "Rp 50.000",
+      "category": "Jasa Creative",
+      "image": "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=500&auto=format&fit=crop"
+    },
+    {
+      "id": 4,
+      "name": "Gantungan Kunci Custom",
+      "price": "Rp 15.000",
+      "category": "Kerajinan",
+      "image": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=500&auto=format&fit=crop"
+    },
+    {
+      "id": 5,
+      "name": "Makaroni Bantet Spesial",
+      "price": "Rp 5.000",
+      "category": "Makanan",
+      "image": "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?q=80&w=500&auto=format&fit=crop"
+    },
+    {
+      "id": 6,
+      "name": "Thai Tea Cinta Niaga",
+      "price": "Rp 12.000",
+      "category": "Minuman",
+      "image": "https://images.unsplash.com/photo-1525193612562-0ec53b0e5d7c?q=80&w=500&auto=format&fit=crop"
+    },
+    {
+      "id": 7,
+      "name": "Notebook Custom A5",
+      "price": "Rp 25.000",
+      "category": "Kerajinan",
+      "image": "https://images.unsplash.com/photo-1531346878377-a5be20888e57?q=80&w=500&auto=format&fit=crop"
+    },
+    {
+      "id": 8,
+      "name": "Risoles Mayo (Isi 3)",
+      "price": "Rp 12.000",
+      "category": "Makanan",
+      "image": "https://images.unsplash.com/photo-1541529086526-db283c563270?q=80&w=500&auto=format&fit=crop"
+    }
+  ]
+}
